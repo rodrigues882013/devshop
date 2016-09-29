@@ -1,0 +1,77 @@
+
+<div class="container animated fadeInRight" ng-controller="CartController as cartCtrl">
+    <div class="row">
+        <h1>Carrinho de compras</h1>
+    </div>
+
+    <div class="row cart">
+
+        <div class="col-xs-12 col-sm-10 col-md-10">
+            <table id="cart-table" class="table table-striped table-hover" ng-if="cartCtrl.developers.length != 0">
+                <thead>
+                <tr>
+                    <th>Nome do Desenvolvedor</th>
+                    <th>Preço</th>
+                    <th>Horas trabalhadas</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="dev in cartCtrl.developers" class="product">
+                    <td>{{dev.name}}</td>
+                    <td>{{dev.price}}</td>                    
+                    <td> 
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <input class="form-control" type="number" ng-model="dev.workedHour">
+                            </div>
+                        </div>
+                    </td>
+                    <td><button class="btn btn-danger pull-right"><i class="glyphicon glyphicon-trash"></i></button></td>
+                </tr>
+                </tbody>
+            </table>
+            <div ng-if="cartCtrl.developers.length == 0" class="well" style="background: #d9edf7;">
+                <h2 class="msg-cart-empty"> Seu carrinho está vazio </h2>
+                <div style="text-align: center;">
+                    <a ui-sref="index">Voltar ao inicio</a>
+                    ou
+                    <a ui-sref="index.developer">Selecionar desenvolvedores</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row totalizer" ng-if="cartCtrl.developers.length != 0">
+        <div class="col-sm-5">
+            <div class="row">
+                <table class="table">
+                    <tbody>
+                    <tr class="total">
+                        <td>Total</td>
+                        <td>{{cartCtrl.total}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="cartCtrl.developers.length != 0">
+        <div class="col-xs-12 col-lg-5">
+            <button ng-click="cartCtrl.makeOrder()"
+                    class="btn btn-success">
+                Fechar Pedido
+            </button>
+        </div>
+        <div class="col-xs-12 col-lg-5">
+            <button ng-click="cartCtrl.clearCart()"
+                    class="btn btn-warning pull-right">
+                Limpar carrinho
+            </button>
+        </div>
+    </div>
+
+</div>
+
+
+

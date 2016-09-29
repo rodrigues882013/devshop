@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="devshop">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font awesome -->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Bootstrap and Fonts -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Main Inspinia CSS files -->
+    <link href="assets/css/animate.css" rel="stylesheet">
+    <link id="loadBefore" href="assets/css/style.css" rel="stylesheet">
+
+
+    <title>Main Page</title>
+</head>
+<body ng-controller="MainCtrl as main">
+
+<div class="container">
+    <!-- Wrapper-->
+
+        <!-- Page wraper -->
+        <!-- ng-class with current state name give you the ability to extended customization your view -->
+
+            <!-- Navabar -->
+            <div ng-include="'app/shared/main/views/topnavbar.html'"></div>
+
+            <!-- Main view  -->
+            <div ui-view></div>
+
+
+
+        <!-- End page wrapper-->
+
+    </div>
+    <!-- End wrapper-->
+</div>
+
+
+<!-- jQuery and Bootstrap -->
+<script src="assets/libs/jquery/jquery-2.1.1.min.js"></script>
+<script src="assets/libs/jquery-ui/jquery-ui-1.10.4.min.js"></script>
+<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
+
+<!-- Main Angular scripts-->
+<script src="assets/libs/angular/angular.min.js"></script>
+
+<script src="assets/libs/angular/angular-resource.min.js"></script>
+<script src="assets/libs/oclazyload/ocLazyLoad.min.js"></script>
+<script src="assets/libs/ui-router/angular-ui-router.min.js"></script>
+<script src="assets/libs/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.route.js"></script>
+
+<!-- Shared components -->
+<script src="app/shared/main/mainController.js"></script>
+<script src="app/shared/main/mainService.js"></script>
+<script src="app/shared/main/directives.js"></script>
+
+<!-- Angular components -->
+<script src="app/components/developer/developerController.js"></script>
+<script src="app/components/developer/developerService.js"></script>
+<script src="app/components/cart/cartController.js"></script>
+<script src="app/components/cart/cartService.js"></script>
+<script src="app/components/order/orderController.js"></script>
+<script src="app/components/order/orderService.js"></script>
+
+
+</body>
+</html>

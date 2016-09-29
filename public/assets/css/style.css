@@ -1,0 +1,17 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.msg-cart-empty{
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #333;
+    font-size: x-large;
+    vertical-align: middle;
+    text-align: center;
+}
