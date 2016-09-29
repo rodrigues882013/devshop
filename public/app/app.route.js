@@ -1,6 +1,3 @@
-/**
- * Created by felipe on 09/01/16.
- */
 
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     $urlRouterProvider.otherwise("/index");

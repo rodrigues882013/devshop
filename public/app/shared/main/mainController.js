@@ -1,3 +1,4 @@
+
 function MainCtrl($scope, mainService){
     $scope.notifyTemplate = 'app/shared/main/views/notify.html';
 

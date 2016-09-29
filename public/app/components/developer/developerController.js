@@ -1,7 +1,4 @@
 
-
-
-
 angular
     .module('devshop.developer')
     .controller('DeveloperController', [
@@ -10,47 +7,36 @@ angular
         'developerService',
         'notify',
         function ($scope, mainService, developerService, notify){
+
+            //Controller As syntax
             var developerCtrl = this;
+            
+            // Setting up some stuffs
             developerCtrl.itemArray = [];
             developerCtrl.elementsAutoComplete = [];
             developerCtrl.selectedElement = undefined;
             developerCtrl.selectedItem= developerCtrl.itemArray;
-
             developerCtrl.developer = {};
             developerCtrl.developer.workedHour = '';
             developerCtrl.developer.developerPrice = '';
-
             developerCtrl.workedHour = {};
             developerCtrl.workedHour.value = ''
-
             developerCtrl.developers = [];
             developerCtrl.page = 0;
             developerCtrl.since = 0;
 
-            developerCtrl.getGitHubUser = function(query){
-                if (query != '') {
-                    developerService.getGitHubUsers(query, developerCtrl.page)
-                        .success(function (data) {
-                            console.log(data);
-                            developerCtrl.elementsAutoComplete = data.items;
-                        });
-                }
-            };
-
-            developerCtrl.loadDevelopersList = function(){
-                developerService.getGitHubUsers('', developerCtrl.page)
-                    .success(function (data) {
-                        developerCtrl.developers = data.items;
-                    });    
-            };
 
             developerCtrl.userWasSelect = function(selected){
-                console.log(selected);
+                console.info("Developer was selected.");
                 developerCtrl.selectedElement = selected;
             };
 
             developerCtrl.addCart = function(developer){
-            
+                
+                console.info("Adding developer in cart");
+                console.info("Developer: %s", developer);
+
+                //Check if at least one hour was typed
                 if ( developer.workedHour == '' || angular.isUndefined(developer.workedHour)){
                     notify({
                         message: 'Digite a quantidade de horas trabalhada.',
@@ -69,6 +55,7 @@ angular
                         }
                     })
                     
+                    //Check if cart already exist, in affirmative case, cart is retrieved and updated
                     if (angular.isDefined(test)){
                         if (mainService.updateCart(currentCart)){
                             notify({
@@ -78,9 +65,11 @@ angular
                             })
                         }
                     } else {
+
+                        //In this case, cart is new
                         if (mainService.addItemInCart(developer)){
                             notify({
-                                message: 'Desenvolverdor adicionado ao carrinho.',
+                                message: 'Desenvolvedor adicionado ao carrinho.',
                                 classes: 'alert-success',
                                 templateUrl: developerCtrl.notifyTemplate
                             })
@@ -90,7 +79,9 @@ angular
             };
 
             developerCtrl.calculatePrice = function(followers, public_repos, public_gists, following){
+                console.info("Calculating price of developer.");
 
+                //Weight averagewas used to calcaulate a price of one developer
                 var weight_follower = followers*2
                 var weight_following = following*2
                 var weight_public_repos = public_repos*3
@@ -101,25 +92,34 @@ angular
             developerCtrl.load = function(){
                 developerService.getGitHubUsers(developerCtrl.page)
                     .then(function (response) {
-                        console.log(response)
+                        console.info("Developers load with successful")
                         angular.forEach(response['data'], function(elem){
 
                             developerService.getFellowers(elem['login'])
-                            .then(function(response2){
-                                elem['followers'] = response2.data['followers'];
-                                elem['public_repos'] = response2.data['public_repos'];
-                                elem['public_gists'] = response2.data['public_gists'];
-                                elem['email'] = response2.data['email'];
-                                elem['name'] = response2.data['name'];
-                                elem['price'] = developerCtrl.calculatePrice(response2.data['followers'],
-                                                                             response2.data['public_repos'],
-                                                                             response2.data['public_gists'],
-                                                                             response2.data['following'])
-                                developerCtrl.developers.push(elem);
-                            }, function(){})
+                                .then(function(response2){
+                                    console.info("Getting more data about developer")
+
+                                    // Adding more data on developer resource, in this case 
+                                    // specifically to calculate price
+
+                                    elem['followers'] = response2.data['followers'];
+                                    elem['public_repos'] = response2.data['public_repos'];
+                                    elem['public_gists'] = response2.data['public_gists'];
+                                    elem['email'] = response2.data['email'];
+                                    elem['name'] = response2.data['name'];
+                                    elem['price'] = developerCtrl.calculatePrice(response2.data['followers'],
+                                                                                 response2.data['public_repos'],
+                                                                                 response2.data['public_gists'],
+                                                                                 response2.data['following'])
+                                    developerCtrl.developers.push(elem);
+                                }, function(){
+                                    console.error("Error in load developer from GitHub");
+                                })
                             
                         })
 
+                        // Update the since parameter with last resource (id) fetched and in the next 
+                        // call to api, use it like limit (floor) to query   
                         developerCtrl.page = response['data'][response['data'].length-1].id;
                         developerCtrl.since++;
                         
@@ -129,10 +129,6 @@ angular
                     
                 
             };
-
-
-
-            //developerCtrl.loadDevelopersList('');
 
             developerCtrl.load();
 

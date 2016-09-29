@@ -1,6 +1,4 @@
-/**
- * Created by felipe on 09/01/16.
- */
+
 
 (function () {
     angular.module('devshop.cart', []);

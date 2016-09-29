@@ -1,6 +1,4 @@
-/**
- * Created by felipe on 12/01/16.
- */
+
 
 // Pulls Mongoose dependency for creating schemas
 var mongoose    = require('mongoose');
