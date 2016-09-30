@@ -4,6 +4,7 @@
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
+//Creating Order collections
 var OrderSchema = new Schema({
     developers: {type: Array, default: []},
     total: Number

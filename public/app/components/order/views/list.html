@@ -6,18 +6,18 @@
 
     <div class="row cart">
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-8 col-md-8">
             <table class="table table-striped table-hover" ng-if="cart.length != 0">
                 <thead>
                 <tr>
-                    <th>Pedidos</th>
-                    <th>Total</th>
+                    <th>Codigo do Pedidos</th>
+                    <th>Valor Total</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="order in orders" class="order">
-                    <td>{{orderCtrl.order._id}}</td>
-                    <td>{{orderCtrl.order.total}}</td>
+                <tr ng-repeat="order in orderCtrl.orders" class="order" ng-click="orderCtrl.detail(order._id)">
+                    <td>{{order._id}}</td>
+                    <td>{{order.total}}</td>
                 </tr>
                 </tbody>
             </table>

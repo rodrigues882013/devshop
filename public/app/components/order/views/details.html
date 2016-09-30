@@ -1,0 +1,54 @@
+
+<div class="container animated fadeInRight" ng-controller="OrderDetailController as orderDetailCtrl">
+    <div class="row">
+        <h1>Detalhamento de pedido</h1>
+    </div>
+
+    <div class="row cart">
+
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <table id="cart-table" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Nome do Desenvolvedor</th>
+                    <th>Preço</th>
+                    <th>Horas trabalhadas</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="dev in orderDetailCtrl.order.developers" class="product">
+                    <td>{{dev.name}}</td>
+                    <td>{{dev.price}}</td>                    
+                    <td>{{dev.workedHour}}<td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row totalizer">
+        <div class="col-sm-5">
+            <div class="row">
+                <table class="table">
+                    <tbody>
+                    <tr class="total">
+                        <td>Total</td>
+                        <td>{{orderDetailCtrl.order.total}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-lg-5">
+            <a ui-sref="order.list" class="btn btn-primary">
+                Voltar a lista de pedidos
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
