@@ -2,26 +2,32 @@
 angular
     .module('devshop.order')
     .controller('OrderController', [
+        '$rootScope',
         '$scope',
         '$state',
+        '$log',
         'orderService',
-        function($scope, $state, orderService){
+        'mainService',
+        function($rootScope, $scope, $state, $log, orderService, mainService){
             //Controller As syntax in use
             var orderCtrl = this;
             
             //Setting up some stufs
             orderCtrl.orders = [];
 
+            //Retrieving number of item in cart
+            $rootScope.items = mainService.getItemLen();
+
             //Getting orders
             orderCtrl.getOrders = function(){
                 orderService.getOrders().then(function(response){
-                    console.info("Retrieving orders");
-                    console.debug("Response Data: %s", response.data);
+                    $log.info("Retrieving orders");
+                    $log.debug("Response Data: %s", response.data);
                     orderCtrl.orders = response.data
 
                 }, function(err, response){
-                    console.error("Error in fecth data");
-                    console.error(err);
+                    $log.error("Error in fecth data");
+                    $log.error(err);
                 });
             };
 
@@ -40,8 +46,9 @@ angular
     .controller('OrderDetailController', [
         '$scope',
         '$state',
+        '$log',
         'orderService',
-        function($scope, $state, orderService){
+        function($scope, $state, $log, orderService){
             //Controller As syntax in use
             var orderDetailCtrl = this;
 
@@ -54,13 +61,13 @@ angular
             //Getting order
             orderDetailCtrl.getOrder = function(){
                 orderService.getOrders(orderDetailCtrl.orderId).then(function(response){
-                    console.info("Retrieving order");
-                    console.debug("Response Data: %s", response.data);
+                    $log.info("Retrieving order");
+                    $log.debug("Response Data: %s", response.data);
                     orderDetailCtrl.order = response.data[0];
 
                 }, function(err, response){
-                    console.error("Error in fecth data");
-                    console.error(err);
+                    $log.error("Error in fecth data");
+                    $log.error(err);
                 });
             };
 

@@ -9,7 +9,8 @@ angular
                 return $http({
                     method: 'GET',
                     url: "https://api.github.com/users",
-                    params: {per_page: 4, since: id},
+                    //params: {per_page: 4, since: id},
+                    params: {per_page: 100, since: id},
 
                 })
             }

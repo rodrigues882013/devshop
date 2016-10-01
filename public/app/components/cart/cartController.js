@@ -2,11 +2,13 @@
 angular
     .module('devshop.cart')
     .controller('CartController', [
+        '$rootScope',
         '$scope',
+        '$log',
         'mainService',
         'cartService',
         'notify',
-        function ($scope, mainService, cartService, notify) {
+        function ($rootScope, $scope, $log, mainService, cartService, notify) {
             
             //Controller As Syntax
             var cartCtrl = this;
@@ -19,22 +21,26 @@ angular
             cartCtrl.workedHour = {};
             cartCtrl.workedHour.value = 0;
 
+            //Retrieving number of item in cart
+            $rootScope.items = mainService.getItemLen();
+
             //Retrieving cart
             cartCtrl.getCurrentCart = function () {
-                console.info("Retrieving cart")
+                $log.info("Retrieving cart")
                 cartCtrl.developers = mainService.getCart();
             };
 
             //Making a order (purchase)
             cartCtrl.makeOrder = function () {
-                console.info("Making a order");
+                $log.info("Making a order");
                 cartCtrl.cart = {
                     developers: cartCtrl.developers,
                     total: cartCtrl.total
                 };
 
                 cartService.makeOrder(cartCtrl.cart).then(function (response) {
-                    console.info("Order made with success.");
+                    $log.info("Order made with success.");
+                    $rootScope.items = mainService.getItemLen();
 
                     notify({
                         message: 'Pedido realizado com sucesso',
@@ -47,7 +53,7 @@ angular
                         cartCtrl.getCurrentCart();
 
                 }, function (response) {
-                    console.error("Error in made the purchase");
+                    $log.error("Error in made the purchase");
                     notify({
                         message: 'Pedido não feito.',
                         classes: 'alert-error',
@@ -58,15 +64,16 @@ angular
 
             //Clear cart
             cartCtrl.clearCart = function () {
-                console.info("Clearing cart")
+                $log.info("Clearing cart")
                 mainService.clearCartState();
                 cartCtrl.getCurrentCart();
+                $rootScope.items = mainService.getItemLen();
             };
 
             //This watcher is necessary to keep total of price updating
             $scope.$watch('cartCtrl.developers', function(devs){
 
-                console.info("Updating total of price")
+                $log.info("Updating total of price")
                 cartCtrl.total = 0
                 angular.forEach(devs, function(elem){
                     cartCtrl.total += elem.price*elem.workedHour;    

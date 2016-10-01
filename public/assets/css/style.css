@@ -15,3 +15,8 @@ body {
     vertical-align: middle;
     text-align: center;
 }
+
+.loading{
+    background: no-repeat fixed center;
+    margin-top: 50%;
+}

@@ -11,10 +11,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a ui-sref="index.main">Inicio</a></li>
+                
                 <li>
                     <a ui-sref="cart">
-                        Carrinho<span class="badge"></span>
+                        Carrinho<span class="badge" ng-show="items > 0">{{items}}</span>
                     </a>
                 </li>
                 <li><a ui-sref="developer.list">Desenvolvedores</a></li>

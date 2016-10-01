@@ -32,10 +32,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
-                            name: 'ui.select',
-                            files: ['assets/css/plugins/ui-select/select.min.css', 'assets/libs/ui-select/select.min.js']
-                        },
-                        {
                             name: 'cgNotify',
                             files: ['assets/css/plugins/angular-notify/angular-notify.min.css', 'assets/libs/angular-notify/angular-notify.min.js']
                         }
