@@ -52,6 +52,8 @@ angular
                     if (mainService.clearCartState())
                         cartCtrl.getCurrentCart();
 
+                    $rootScope.items = mainService.getItemLen();
+
                 }, function (response) {
                     $log.error("Error in made the purchase");
                     notify({
@@ -61,6 +63,18 @@ angular
                     });
                 })
             };
+
+            //Drop item cart
+            cartCtrl.removeDeveloper = function(dev){
+                var i = 0;
+                angular.forEach(cartCtrl.developers, function(item){
+                    if (dev.id == item.id)
+                       cartCtrl.developers.splice(i, 1);
+                    i++;
+                })
+                $rootScope.items = mainService.getItemLen();
+
+            }
 
             //Clear cart
             cartCtrl.clearCart = function () {

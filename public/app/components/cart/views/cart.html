@@ -17,7 +17,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="dev in cartCtrl.developers" class="product">
+                <tr ng-repeat="dev in cartCtrl.developers track by $index" class="product">
                     <td>{{dev.name}}</td>
                     <td>{{dev.price}}</td>                    
                     <td> 
@@ -27,7 +27,13 @@
                             </div>
                         </div>
                     </td>
-                    <td><button class="btn btn-danger pull-right"><i class="glyphicon glyphicon-trash"></i></button></td>
+                    <td>
+                        <button 
+                            class="btn btn-danger pull-right"
+                            ng-click="cartCtrl.removeDeveloper(dev)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
