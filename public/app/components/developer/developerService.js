@@ -3,9 +3,11 @@ angular
     .module('devshop.developer')
     .factory('developerService', [
         '$http',
+        '$log',
         'serviceConfig',
-        function ($http) {
+        function ($http, $log) {
             function getGitHubUsers(id){
+                $log.info("Getting users")
                 return $http({
                     method: 'GET',
                     url: "https://api.github.com/users",
@@ -15,7 +17,9 @@ angular
                 })
             }
 
-            function getFellowers(user){
+            function getMoreDataAboutUser(user){
+
+                
                 return $http({
                     method: 'GET',
                     url: "https://api.github.com/users/" + user,
@@ -24,6 +28,6 @@ angular
 
             return {
                 getGitHubUsers: getGitHubUsers,
-                getFellowers: getFellowers
+                getMoreDataAboutUser: getMoreDataAboutUser
             }
         }]);

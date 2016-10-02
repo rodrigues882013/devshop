@@ -15,19 +15,18 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'public/assets/libs/jquery/jquery-2.2.1.min.js',
-            'public/assets/libs/angular/angular.js',
-            'public/assets/libs/angular/angular-route.js',
-            'public/assets/libs/angular/angular-resource.js',
-            'public/assets/libs/angular/angular-mocks.js',
-            'public/assets/libs/ui-router/angular-ui-router.js',
-            'public/assets/libs/angular/angular-resource.min.js',
-            'public/assets/libs/angular/angular-sanitize.min.js',
-            'public/assets/libs/plugins/oclazyload/dist/ocLazyLoad.min.js',
-            'public/assets/libs/bootstrap/ui-bootstrap-tpls-0.12.0.min.js',
+            'bower_components/jquery/dist/jquery.min.js',
+            'bower_components/angular/angular.js',
+            'bower_components/angular-route/angular-route.js',
+            'bower_components/angular-route/angular-resource.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-ui-router/releases/angular-ui-router.js',
+            'bower_components/angular-resource/angular-resource.min.js',
+            'bower_components/angular-sanitize/angular-sanitize.min.js',
+            'bower_components/oclazyload/dist/oclazyload/dist/ocLazyLoad.min.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
             'public/assets/libs/plugins/angular-notify/*.js',
             'public/app/app.module.js',
-            'public/app/config/params.js',
             'public/app/app.route.js',
             'public/app/shared/*js',
             'public/app/components/cart/*.js',
@@ -79,7 +78,7 @@ module.exports = function(config) {
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true,
 
         // Concurrency level
         // how many browser should be started simultaneous

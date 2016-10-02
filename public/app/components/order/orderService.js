@@ -7,7 +7,7 @@ angular
         function ($http, serviceConfig) {
 
             //Getting orders
-            function getOrders(id_order){
+            function getOrder(id_order){
                 console.info("Fetching data of api");
                 console.debug("Retrieving order_id: %s", id_order)
                 var id = angular.isDefined(id_order) ? id_order : '';
@@ -15,7 +15,20 @@ angular
                 //Setting up some option to request
                 var options = {
                     method: 'GET',
-                    url: serviceConfig.base + 'orders/' + id
+                    url: serviceConfig.base + 'order/' + id
+                };
+
+                //Return a promise
+                return $http(options);
+            }
+
+            function getOrders(id_order){
+                console.info("Fetching data of api");
+                
+                //Setting up some option to request
+                var options = {
+                    method: 'GET',
+                    url: serviceConfig.base + 'orders/'
                 };
 
                 //Return a promise
@@ -24,6 +37,7 @@ angular
 
             return {
                 //Exposing methods of service
-                getOrders: getOrders
+                getOrders: getOrders,
+                getOrder: getOrder
             }
         }]);

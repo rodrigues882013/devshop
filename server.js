@@ -4,10 +4,30 @@ var express     = require('express');
 var app         = express();
 var mongoose    = require('mongoose');
 var bodyParser  = require('body-parser');
+var morgan      = require('morgan');
+var config      = require('config');
 
 
 //Sets the connection to MongoDB
-mongoose.connect('mongodb://localhost/test');
+var options = { 
+	server: {
+		socketOptions: {
+	  		keepAlive: 1, connectTimeoutMS: 30000 
+	  	}
+	}, 
+    replset: {
+    	socketOptions: {
+    		keepAlive: 1, 
+    		connectTimeoutMS : 30000 
+    	} 
+    } 
+}; 
+
+console.log(config.DBHost)
+mongoose.connect(config.DBHost, options);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 //Set up port when application listen
 var port = 8000;
@@ -22,10 +42,13 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json'}));  // parse applica
 
 
 // Routes
-require('./app/routes.js')(app);
+require('./app/routes/order.js')(app);
+require('./app/routes/coupon.js')(app);
 
 // Listen (start app)
 app.listen(port);
 console.log('App listening on port ' + port);
+
+module.exports = app; // for testing
 
 

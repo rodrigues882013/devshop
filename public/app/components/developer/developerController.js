@@ -120,7 +120,7 @@ angular
                         $log.info("Getting developer")
                         angular.forEach(response['data'], function(elem){
 
-                            developerService.getFellowers(elem['login'])
+                            developerService.getMoreDataAboutUser(elem['login'])
                                 .then(function(response2){
                                     
 

@@ -20,9 +20,44 @@ angular
             cartCtrl.total = 0;
             cartCtrl.workedHour = {};
             cartCtrl.workedHour.value = 0;
+            cartCtrl.coupon = undefined;
+            cartCtrl.isValid = undefined;
+            cartCtrl.portionDiscounted = 0
 
             //Retrieving number of item in cart
             $rootScope.items = mainService.getItemLen();
+
+            //Validating cupon
+            cartCtrl.validateCoupon = function(){
+                $log.debug("Coupom CODE: %s", cartCtrl.coupon.toString())
+                cartService.validateCoupon(cartCtrl.coupon).then(function(response){
+                    cartCtrl.isValid = response.data['isValid']
+                    $log.info(response.data['isValid'])
+                    if(cartCtrl.isValid){
+                        // 10% is a reasonable discount
+                        cartCtrl.portionDiscounted = cartCtrl.total*0.1
+                        cartCtrl.total -= (cartCtrl.total*0.1)  
+                    }
+
+                    if (!cartCtrl.isValid){
+                         notify({
+                            message: 'O cupom digitado não é valido ou expirou, tente novamente',
+                            classes: 'alert-warning',
+                            templateUrl: cartCtrl.notifyTemplate
+                        });    
+                    }
+
+                }, function(response){
+
+                })
+            }
+
+            cartCtrl.removeCoupon = function(){
+                cartCtrl.coupon = undefined;
+                cartCtrl.isValid = undefined;
+                cartCtrl.total += cartCtrl.portionDiscounted;
+
+            }
 
             //Retrieving cart
             cartCtrl.getCurrentCart = function () {
