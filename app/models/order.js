@@ -7,6 +7,7 @@ var Schema      = mongoose.Schema;
 //Creating Order collections
 var OrderSchema = new Schema({
     developers: {type: Array, default: []},
+    orderDate: Number,
     total: Number
 
 });

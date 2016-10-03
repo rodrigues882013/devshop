@@ -4,20 +4,31 @@
         <h1>Historico de pedidos</h1>
     </div>
 
-    <div class="row cart">
+    <div ng-show="orderCtrl.orders.length <= 0" class="well" style="background: #d9edf7;">
+                <h2 class="msg-cart-empty"> Sem pedidos registrados </h2>
+                <div style="text-align: center;">
+                    <a ui-sref="index">Voltar ao inicio</a>
+                    ou
+                    <a ui-sref="index.developer">Selecionar desenvolvedores</a>
+                </div>
+            </div>
+
+    <div class="row cart" ng-show="orderCtrl.orders.length > 0">
 
         <div class="col-xs-12 col-sm-8 col-md-8">
             <table class="table table-striped table-hover" ng-if="cart.length != 0">
                 <thead>
                 <tr>
-                    <th>Codigo do Pedidos</th>
+                    <th>Codigo do Pedido</th>
                     <th>Valor Total</th>
+                    <th>Data e Hora do Pedido</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="order in orderCtrl.orders" class="order" ng-click="orderCtrl.detail(order._id)">
                     <td>{{order._id}}</td>
                     <td>{{order.total}}</td>
+                    <td>{{order.orderDate}}</td>
                 </tr>
                 </tbody>
             </table>

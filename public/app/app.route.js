@@ -34,7 +34,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         {
                             name: 'cgNotify',
                             files: ['assets/css/plugins/angular-notify/angular-notify.min.css', 'assets/libs/angular-notify/angular-notify.min.js']
-                        }
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['../bower_components/angular-ui-select/dist/select.css', '../bower_components/angular-ui-select/dist/select.js']
+                        },
 
                     ])
                 }

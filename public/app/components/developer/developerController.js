@@ -35,6 +35,7 @@ angular
             developerCtrl.totalItems = 0;
             developerCtrl.currentPage = 1;
             developerCtrl.isLoad = true;
+            developerCtrl.query = '';
             
             //Retrieving number of item in cart
             $rootScope.items = mainService.getItemLen();
@@ -48,12 +49,7 @@ angular
                 developerCtrl.developersOnScreen = developerCtrl.developersIndexed[developerCtrl.currentPage-1]
                 $log.info('Page changed to: ' + developerCtrl.currentPage);
             };
-
-
-            developerCtrl.userWasSelect = function(selected){
-                $log.info("Developer was selected.");
-                developerCtrl.selectedElement = selected;
-            };
+            
 
             developerCtrl.addCart = function(developer){
                 
@@ -153,7 +149,7 @@ angular
 
                             //Setting total of pages
                             developerCtrl.totalItems = developerCtrl.developers.length
-                            
+                            developerCtrl.elementsAutoComplete = developerCtrl.developers
 
                             /* Indexing item on page
                                The pages follow scheme below 
@@ -209,3 +205,4 @@ angular
             developerCtrl.load();
 
         }]);
+    

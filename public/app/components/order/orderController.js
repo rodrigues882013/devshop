@@ -25,6 +25,20 @@ angular
                     $log.debug("Response Data: %s", response.data);
                     orderCtrl.orders = response.data
 
+                    angular.forEach(orderCtrl.orders, function(elem){
+                        $log.info(elem['orderDate'])
+
+                        if (elem.hasOwnProperty('orderDate') &&
+                            angular.isDefined(elem.orderDate) && 
+                            elem.orderDate != ''){
+
+                            elem['orderDate'] = new Date(elem['orderDate'])
+                                                    .toISOString()
+                                                    .replace(/T/, ' ')
+                                                    .replace(/\..+/, '')
+                        }
+                    })
+
                 }, function(err, response){
                     $log.error("Error in fecth data");
                     $log.error(err);

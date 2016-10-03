@@ -8,7 +8,12 @@ angular
         'serviceConfig',
         function ($http, $log, mainService, serviceConfig) {
             function makeOrder(data){
+
+                //Register date of order
+                data['orderDate'] = new Date().getTime();
                 $log.info("Making an order");
+
+                console.log(data)
                 var options = {
                     method: 'POST',
                     url: serviceConfig.base + 'order/',

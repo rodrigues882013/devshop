@@ -44,6 +44,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json'}));  // parse applica
 // Routes
 require('./app/routes/order.js')(app);
 require('./app/routes/coupon.js')(app);
+require('./app/routes/developer.js')(app);
 
 // Listen (start app)
 app.listen(port);
