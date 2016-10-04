@@ -1,3 +1,3 @@
 {
-    "DBHost": "mongodb://_devshop_:_devshop_@ds049456.mlab.com:49456/devshop"
+    "DBHost": "mongodb://localhost/devshop"
 }
