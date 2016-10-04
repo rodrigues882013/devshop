@@ -5,7 +5,8 @@ angular
         '$http',
         '$log',
         'serviceConfig',
-        function ($http, $log) {
+         ($http, $log) => {
+            
             function getGitHubUsers(id){
                 $log.info("Getting users")
                 return $http({

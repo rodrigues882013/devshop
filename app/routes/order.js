@@ -13,7 +13,7 @@ module.exports = function(app) {
 
     // HTTP Get
     app
-        .get('/orders', function(request, response){
+        .get('/orders', (request, response) => {
             // Example: GET /orders
             // Fetch all orders mades along time
             
@@ -29,7 +29,7 @@ module.exports = function(app) {
             });
         })
 
-        .get('/order/:order_id', function(request, response) {
+        .get('/order/:order_id', (request, response) => {
             // Example: GET /orders/123
             // Fetch register with _id=123
 
@@ -51,7 +51,7 @@ module.exports = function(app) {
 
     // HTTP Post
     // --------------------------------------------------------
-    app.post('/order', function(request, response){
+    app.post('/order', (request, response) => {
 
         console.log(new Date().toISOString() + " - POST request")
         console.log(new Date().toISOString() + " - " + JSON.stringify(request.body))

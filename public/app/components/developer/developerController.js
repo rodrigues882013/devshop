@@ -38,18 +38,18 @@ angular
             //Retrieving number of item in cart
             $rootScope.items = mainService.getItemLen();
 
-            developerCtrl.setPage = function (pageNo) {
+            developerCtrl.setPage = (pageNo) => {
                 developerCtrl.currentPage = pageNo;
             };
 
-            developerCtrl.pageChanged = function() {
+            developerCtrl.pageChanged = () => {
                 developerCtrl.developersOnScreen = []
                 developerCtrl.developersOnScreen = developerCtrl.developersIndexed[developerCtrl.currentPage-1]
                 $log.info('Page changed to: ' + developerCtrl.currentPage);
             };
             
 
-            developerCtrl.addCart = function(developer){
+            developerCtrl.addCart = (developer) => {
                 
                 $log.info("Adding developer in cart");
                 $log.info("Developer: %s", developer);
@@ -97,7 +97,7 @@ angular
                 }
             };
 
-            developerCtrl.calculatePrice = function(followers, public_repos, public_gists, following){
+            developerCtrl.calculatePrice = (followers, public_repos, public_gists, following) => {
                 $log.info("Calculating price of developer.");
 
                 //Weight averagewas used to calcaulate a price of one developer
@@ -108,7 +108,7 @@ angular
                 return ((weight_follower + weight_public_repos + weight_public_gists) / 10);
             }
 
-            developerCtrl.load = function(){
+            developerCtrl.load = () => {
                 developerService.getGitHubUsers(developerCtrl.page)
                     .then(function (response) {
                         $log.info("Getting developer")

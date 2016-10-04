@@ -33,8 +33,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 var port = process.env.PORT;
 
 //Parsing
-app.use(express.static(__dirname + '/public/'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components')); // Use BowerComponents
+app.use(express.static(__dirname + '/public/')); // Angular app directory
+app.use('/bower_components',  express.static(__dirname + '/bower_components')); // Using Bower Components
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.urlencoded({extended: true}));               // parse application/x-www-form-urlencoded
 app.use(bodyParser.text());                                     // allows bodyParser to look at raw text
@@ -43,8 +43,6 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json'}));  // parse applica
 
 // Routes
 require('./app/routes/order.js')(app);
-require('./app/routes/coupon.js')(app);
-require('./app/routes/developer.js')(app);
 
 // Listen (start app)
 app.listen(port || 8080);

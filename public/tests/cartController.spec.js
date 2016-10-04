@@ -21,6 +21,8 @@ describe('CartControllerTest', function() {
     var mainService;
     var controller;
     var notify;
+    var $httpBackend;
+    var fakeResponse = {isValid: false};
 
     function createController(){
         controller = $controller('CartController',
@@ -36,16 +38,21 @@ describe('CartControllerTest', function() {
     
 
     //Inject some dependencies too.
-    beforeEach(inject(function(_$controller_, _$rootScope_, _mainService_, _cartService_, $injector){
+    beforeEach(inject(function(_$controller_, _$rootScope_, _$httpBackend_, _mainService_, _cartService_, $injector){
         $controller = _$controller_;
         $rootScope = _$rootScope_;
+        $httpBackend = _$httpBackend_;
         cartService = _cartService_;
         mainService = _mainService_;
+
         notify = $injector.get('notify');
         
 
         //Creating a new scope, descendant of $rootScope
         $scope = $rootScope.$new();
+
+        //Setting some callbacks
+        $httpBackend.when('POST', 'http://localhost:8000/order').respond(200);
 
     }));
 
@@ -80,6 +87,34 @@ describe('CartControllerTest', function() {
     })
 
     it('Testing method behaviors', function(){
+        controller.coupon = '44444';
+        controller.validateCoupon()
+        expect(controller.isValid).toBe(false)
+
+        controller.coupon = 'SHIPIT';
+        controller.validateCoupon()
+        expect(controller.isValid).toBe(true)
+
+        controller.coupon = 'SHIPIT';
+        controller.validateCoupon()
+        expect(controller.isValid).toBe(true)
+        controller.removeCoupon()
+        expect(controller.isValid).toBeUndefined()
+
+        expect(controller.developers.length).toBe(0)
+        controller.getCurrentCart()
+        expect(controller.developers.length).toBe(0)
+
+        controller.developers = []
+        controller.total = 5222
+        controller.cart = {
+            developers: controller.developers,
+            total: controller.total
+        }
+        controller.makeOrder();
+        $httpBackend.flush();
+        expect(controller.cart).toEqual({})
+        
 
     })
 

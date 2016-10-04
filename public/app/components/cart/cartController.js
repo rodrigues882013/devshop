@@ -20,18 +20,19 @@ angular
             cartCtrl.coupon = undefined;
             cartCtrl.isValid = undefined;
             cartCtrl.portionDiscounted = 0
+            var SHIPIT = "SHIPIT"
 
             //Retrieving number of item in cart
             $rootScope.items = mainService.getItemLen();
 
             //Validating cupon
-            cartCtrl.validateCoupon = function(){
+            cartCtrl.validateCoupon = () => {
 
 
                 $log.debug("Coupom CODE: %s", cartCtrl.coupon.toString())
 
                 // Check coupon explicity SHIPIT
-                if (cartCtrl.coupon == "SHIPIT") {
+                if (cartCtrl.coupon == SHIPIT) {
                     // 10% is a reasonable discount
                     cartCtrl.isValid = true;
                     cartCtrl.portionDiscounted = cartCtrl.total*0.1
@@ -39,32 +40,20 @@ angular
 
                 } else{
 
-                    // If shipit is not valid, search for coupon on api endpoint /coupon/<code>    
-                    cartService.validateCoupon(cartCtrl.coupon).then(function(response){
+                    if (!cartCtrl.isValid){
+                        cartCtrl.isValid = false;
+                         notify({
+                            message: 'O cupom digitado não é valido ou expirou, tente novamente',
+                            classes: 'alert-warning',
+                            templateUrl: cartCtrl.notifyTemplate
+                        });    
+                    }
 
-                        cartCtrl.isValid = response.data['isValid']
-                        $log.info(response.data['isValid'])
-                        if(cartCtrl.isValid){
-                            // 10% is a reasonable discount
-                            cartCtrl.portionDiscounted = cartCtrl.total*0.1
-                            cartCtrl.total -= (cartCtrl.total*0.1)  
-                        }
-
-                        if (!cartCtrl.isValid){
-                             notify({
-                                message: 'O cupom digitado não é valido ou expirou, tente novamente',
-                                classes: 'alert-warning',
-                                templateUrl: cartCtrl.notifyTemplate
-                            });    
-                        }
-
-                    }, function(response){
-
-                    })
                 }
+                
             }
 
-            cartCtrl.removeCoupon = function(){
+            cartCtrl.removeCoupon = () => {
                 cartCtrl.coupon = undefined;
                 cartCtrl.isValid = undefined;
                 cartCtrl.total += cartCtrl.portionDiscounted;
@@ -72,20 +61,20 @@ angular
             }
 
             //Retrieving cart
-            cartCtrl.getCurrentCart = function () {
+            cartCtrl.getCurrentCart = () => {
                 $log.info("Retrieving cart")
                 cartCtrl.developers = mainService.getCart();
             };
 
             //Making a order (purchase)
-            cartCtrl.makeOrder = function () {
+            cartCtrl.makeOrder = () => {
                 $log.info("Making a order");
                 cartCtrl.cart = {
                     developers: cartCtrl.developers,
                     total: cartCtrl.total
                 };
 
-                cartService.makeOrder(cartCtrl.cart).then(function (response) {
+                cartService.makeOrder(cartCtrl.cart).then((response) => {
                     $log.info("Order made with success.");
                     $rootScope.items = mainService.getItemLen();
 
@@ -95,13 +84,14 @@ angular
                         templateUrl: cartCtrl.notifyTemplate
                     });
 
+
                     //In this case, there was success, then the cart is clear
                     if (mainService.clearCartState())
                         cartCtrl.getCurrentCart();
 
                     $rootScope.items = mainService.getItemLen();
 
-                }, function (response) {
+                }, (response) => {
                     $log.error("Error in made the purchase");
                     notify({
                         message: 'Pedido não feito.',
@@ -112,7 +102,7 @@ angular
             };
 
             //Drop item cart
-            cartCtrl.removeDeveloper = function(dev){
+            cartCtrl.removeDeveloper = (dev) => {
                 var i = 0;
                 angular.forEach(cartCtrl.developers, function(item){
                     if (dev.id == item.id)
@@ -124,7 +114,7 @@ angular
             }
 
             //Clear cart
-            cartCtrl.clearCart = function () {
+            cartCtrl.clearCart =  () => {
                 $log.info("Clearing cart")
                 mainService.clearCartState();
                 cartCtrl.getCurrentCart();
@@ -132,7 +122,7 @@ angular
             };
 
             //This watcher is necessary to keep total of price updating
-            $scope.$watch('cartCtrl.developers', function(devs){
+            $scope.$watch('cartCtrl.developers', (devs) => {
 
                 $log.info("Updating total of price")
                 cartCtrl.total = 0

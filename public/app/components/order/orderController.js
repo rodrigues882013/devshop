@@ -19,7 +19,7 @@ angular
             $rootScope.items = mainService.getItemLen();
 
             //Getting orders
-            orderCtrl.getOrders = function(){
+            orderCtrl.getOrders = () => {
                 orderService.getOrders().then(function(response){
                     $log.info("Retrieving orders");
                     $log.debug("Response Data: %s", response.data);
@@ -46,7 +46,7 @@ angular
             };
 
             //Gonna to order detail page
-            orderCtrl.detail = function(orderId){
+            orderCtrl.detail = (orderId) => {
                 $state.go('order.detail', {id: orderId});
             }
 
@@ -73,7 +73,7 @@ angular
             orderDetailCtrl.order = {};
 
             //Getting order
-            orderDetailCtrl.getOrder = function(){
+            orderDetailCtrl.getOrder = () => {
                 orderService.getOrder(orderDetailCtrl.orderId).then(function(response){
                     $log.info("Retrieving order");
                     $log.debug("Response Data: %s", response.data);

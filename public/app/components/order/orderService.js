@@ -4,7 +4,7 @@ angular
     .factory('orderService', [
         '$http',
         'serviceConfig',
-        function ($http, serviceConfig) {
+        ($http, serviceConfig) => {
 
             //Getting orders
             function getOrder(id_order){
@@ -28,7 +28,7 @@ angular
                 //Setting up some option to request
                 var options = {
                     method: 'GET',
-                    url: '/orders/'
+                    url:  '/orders/'
                 };
 
                 //Return a promise

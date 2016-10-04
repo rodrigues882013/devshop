@@ -6,14 +6,14 @@ angular
         '$log',
         'mainService',
         'serviceConfig',
-        function ($http, $log, mainService, serviceConfig) {
+        ($http, $log, mainService, serviceConfig) => {
+
             function makeOrder(data){
 
                 //Register date of order
                 data['orderDate'] = new Date().getTime();
                 $log.info("Making an order");
 
-                console.log(data)
                 var options = {
                     method: 'POST',
                     url: '/order/',
@@ -27,22 +27,9 @@ angular
                 return mainService.getCart();
             }
 
-            function validateCoupon(code){
-                $log.debug("Coupom CODE: %s", code.toString())
-
-                var options = {
-                    method: 'GET',
-                    url: '/coupon/' + code
-                }
-
-                return $http(options)
-            }
-
-
-
+            
             return {
                 makeOrder: makeOrder,
                 getOrder: getCart,
-                validateCoupon: validateCoupon
             }
         }]);
