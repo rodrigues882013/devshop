@@ -30,7 +30,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 //Set up port when application listen
-var port = 5000;
+var port = process.env.PORT;
 
 //Parsing
 app.use(express.static(__dirname + '/public/'));
