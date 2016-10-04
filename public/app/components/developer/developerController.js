@@ -61,6 +61,12 @@ angular
                         classes: 'alert-danger',
                         templateUrl: developerCtrl.notifyTemplate
                     })
+                } else if (parseInt(developer.workedHour) < 0){
+                    notify({
+                        message: 'Digite um valor corretamente.',
+                        classes: 'alert-danger',
+                        templateUrl: developerCtrl.notifyTemplate
+                    })
                 } else {
 
                     var test = undefined;
