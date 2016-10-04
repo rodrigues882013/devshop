@@ -47,7 +47,7 @@ require('./app/routes/coupon.js')(app);
 require('./app/routes/developer.js')(app);
 
 // Listen (start app)
-app.listen(port);
+app.listen(port || 8080);
 console.log('App listening on port ' + port);
 
 module.exports = app; // for testing

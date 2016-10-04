@@ -31,7 +31,7 @@ angular
                 $log.debug("Coupom CODE: %s", cartCtrl.coupon.toString())
 
                 // Check coupon explicity SHIPIT
-                if (angularcartCtrl.coupon == "SHIPIT") {
+                if (cartCtrl.coupon == "SHIPIT") {
                     // 10% is a reasonable discount
                     cartCtrl.isValid = true;
                     cartCtrl.portionDiscounted = cartCtrl.total*0.1
