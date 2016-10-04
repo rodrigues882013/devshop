@@ -16,10 +16,7 @@ angular
             // Setting up some stuffs
             cartCtrl.developers = [];
             cartCtrl.cart = {};
-            cartCtrl.price = {};
             cartCtrl.total = 0;
-            cartCtrl.workedHour = {};
-            cartCtrl.workedHour.value = 0;
             cartCtrl.coupon = undefined;
             cartCtrl.isValid = undefined;
             cartCtrl.portionDiscounted = 0

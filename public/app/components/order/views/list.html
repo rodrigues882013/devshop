@@ -25,10 +25,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="order in orderCtrl.orders" class="order" ng-click="orderCtrl.detail(order._id)">
+                <tr ng-repeat="order in orderCtrl.orders" class="order">
                     <td>{{order._id}}</td>
                     <td>{{order.total}}</td>
                     <td>{{order.orderDate}}</td>
+                    <td> <a ui-sref="order.detail({id: order._id})"> Detalhar </a></td>
                 </tr>
                 </tbody>
             </table>

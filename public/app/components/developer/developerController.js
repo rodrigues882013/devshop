@@ -22,8 +22,6 @@ angular
             developerCtrl.developer = {};
             developerCtrl.developer.workedHour = '';
             developerCtrl.developer.developerPrice = '';
-            developerCtrl.workedHour = {};
-            developerCtrl.workedHour.value = ''
             developerCtrl.developers = [];
             developerCtrl.developersIndexed = [];
             developerCtrl.developersOnScreen = []

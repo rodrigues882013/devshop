@@ -1,5 +1,4 @@
-// Karma configuration
-// Generated on Mon Jun 27 2016 09:47:51 GMT-0300 (BRT)
+
 
 module.exports = function(config) {
     config.set({
@@ -15,25 +14,26 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/angular/angular.js',
             'bower_components/angular-route/angular-route.js',
-            'bower_components/angular-route/angular-resource.js',
+            'bower_components/angular-resource/angular-resource.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'bower_components/angular-ui-router/releases/angular-ui-router.js',
-            'bower_components/angular-resource/angular-resource.min.js',
-            'bower_components/angular-sanitize/angular-sanitize.min.js',
-            'bower_components/oclazyload/dist/oclazyload/dist/ocLazyLoad.min.js',
+            'bower_components/angular-ui-router/release/angular-ui-router.js',
+            'bower_components/angular-resource/angular-resource.js',
+            'bower_components/angular-sanitize/angular-sanitize.js',
+            'bower_components/oclazyload/dist/ocLazyLoad.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-            'public/assets/libs/plugins/angular-notify/*.js',
+
+            'public/assets/libs/angular-notify/angular-notify.min.js',
             'public/app/app.module.js',
             'public/app/app.route.js',
-            'public/app/shared/*js',
+            'public/app/shared/main/*.js',
             'public/app/components/cart/*.js',
             'public/app/components/order/*.js',
             'public/app/components/developer/*.js',
-            'public/app/shared/main/*.js',
-            "public/tests/*.js"
+            'public/tests/*.spec.js'
         ],
 
 

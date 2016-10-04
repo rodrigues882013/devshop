@@ -74,7 +74,7 @@ angular
 
             //Getting order
             orderDetailCtrl.getOrder = function(){
-                orderService.getOrders(orderDetailCtrl.orderId).then(function(response){
+                orderService.getOrder(orderDetailCtrl.orderId).then(function(response){
                     $log.info("Retrieving order");
                     $log.debug("Response Data: %s", response.data);
                     orderDetailCtrl.order = response.data[0];
