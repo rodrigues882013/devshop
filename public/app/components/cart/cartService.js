@@ -16,7 +16,7 @@ angular
                 console.log(data)
                 var options = {
                     method: 'POST',
-                    url: serviceConfig.base + 'order/',
+                    url: '/order/',
                     data: data,
                     headers: {'Content-Type': 'application/json'}
                 };
@@ -32,7 +32,7 @@ angular
 
                 var options = {
                     method: 'GET',
-                    url: serviceConfig.base + 'coupon/' + code
+                    url: '/coupon/' + code
                 }
 
                 return $http(options)

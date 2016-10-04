@@ -15,7 +15,7 @@ angular
                 //Setting up some option to request
                 var options = {
                     method: 'GET',
-                    url: serviceConfig.base + 'order/' + id
+                    url: '/order/' + id
                 };
 
                 //Return a promise
@@ -28,7 +28,7 @@ angular
                 //Setting up some option to request
                 var options = {
                     method: 'GET',
-                    url: serviceConfig.base + 'orders/'
+                    url: '/orders/'
                 };
 
                 //Return a promise

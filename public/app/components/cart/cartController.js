@@ -26,27 +26,42 @@ angular
 
             //Validating cupon
             cartCtrl.validateCoupon = function(){
+
+
                 $log.debug("Coupom CODE: %s", cartCtrl.coupon.toString())
-                cartService.validateCoupon(cartCtrl.coupon).then(function(response){
-                    cartCtrl.isValid = response.data['isValid']
-                    $log.info(response.data['isValid'])
-                    if(cartCtrl.isValid){
-                        // 10% is a reasonable discount
-                        cartCtrl.portionDiscounted = cartCtrl.total*0.1
-                        cartCtrl.total -= (cartCtrl.total*0.1)  
-                    }
 
-                    if (!cartCtrl.isValid){
-                         notify({
-                            message: 'O cupom digitado não é valido ou expirou, tente novamente',
-                            classes: 'alert-warning',
-                            templateUrl: cartCtrl.notifyTemplate
-                        });    
-                    }
+                // Check coupon explicity SHIPIT
+                if (angularcartCtrl.coupon == "SHIPIT") {
+                    // 10% is a reasonable discount
+                    cartCtrl.isValid = true;
+                    cartCtrl.portionDiscounted = cartCtrl.total*0.1
+                    cartCtrl.total -= (cartCtrl.total*0.1)  
 
-                }, function(response){
+                } else{
 
-                })
+                    // If shipit is not valid, search for coupon on api endpoint /coupon/<code>    
+                    cartService.validateCoupon(cartCtrl.coupon).then(function(response){
+
+                        cartCtrl.isValid = response.data['isValid']
+                        $log.info(response.data['isValid'])
+                        if(cartCtrl.isValid){
+                            // 10% is a reasonable discount
+                            cartCtrl.portionDiscounted = cartCtrl.total*0.1
+                            cartCtrl.total -= (cartCtrl.total*0.1)  
+                        }
+
+                        if (!cartCtrl.isValid){
+                             notify({
+                                message: 'O cupom digitado não é valido ou expirou, tente novamente',
+                                classes: 'alert-warning',
+                                templateUrl: cartCtrl.notifyTemplate
+                            });    
+                        }
+
+                    }, function(response){
+
+                    })
+                }
             }
 
             cartCtrl.removeCoupon = function(){
