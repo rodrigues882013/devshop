@@ -1,0 +1,16 @@
+
+1) Para backend preferir utilizar o nodejs (em conjunto com express) pois é uma tecnologia que vem crescendo 
+muito em utilização nos ulimos anos e acho que é uma alternativa mantes a mesma linguagem tanto no front quando no backend
+
+2) Para a aplicação cliente eu iniciei o codding em ReactJs + flux, mas como vinha vendo isso a bem pouco tempo e os conhecimentos
+que eu adquiri sobre o mesmo recentemente me fizeram declinar em usa-lo para resolver o desafio neste momento, acho que precisa-
+ria de mais algumas semanas para poder usa-lo a um nivel aceitavel. Escolhi então angular pois tenho uma certa familiaridade
+com o mesmo, logo mantive a pagina como um SPA, so que por esses motivos preferi usar o angular.
+
+3) Procurei explicar os passos que adotei na solução, comentando e logando quase tudo que eu acho significativo e passivel de 
+ser explicado.
+
+4) Procurei cobrir a aplicação com alguns testes unitarios, no cliente e no servidor.
+
+5) Agradeço pela oportunidade de mostrar o meu trabalho e gostaria que mesmo em caso negativo vocês me falassem se possivel os
+pontos onde poderia melhorar. 
